@@ -1,3 +1,4 @@
+from django.http import response
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 import pickle
@@ -7,6 +8,8 @@ from tensorflow import Graph
 from keras.preprocessing import image
 from keras.applications.imagenet_utils import decode_predictions
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 # Create your views here.
 model_graph = Graph()
 
@@ -22,10 +25,12 @@ def index(request):
 
 img_height, img_width=224,224
 
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 def predictImage(request):
     print (request)
     print (request.POST.dict())
-    fileObj=request.FILES['filePath']
+    fileObj=request.FILES['cover']
     fs=FileSystemStorage()
     filePathName=fs.save(fileObj.name,fileObj)
     filePathName=fs.url(filePathName)
@@ -44,8 +49,15 @@ def predictImage(request):
     print(classes_x)
     classes=['Apple__Apple_scab', 'Apple_Black_rot', 'Apple_Cedar_apple_rust', 'Apple_healthy',  'Blueberry_healthy', 'Cherry(including_sour)___Powdery_mildew','Cherry_(including_sour)__healthy','Corn(maize)__Cercospora_leaf_spot Gray_leaf_spot', 'Corn(maize)__Common_rust', 'Corn_(maize)___Northern_Leaf_Blight','Corn_(maize)__healthy',  'Grape_Black_rot', 'Grape_Esca(Black_Measles)', 'Grape__Leaf_blight(Isariopsis_Leaf_Spot)', 'Grape__healthy', 'Orange_Haunglongbing(Citrus_greening)',  'Peach__Bacterial_spot', 'Peach_healthy', 'Pepper,_bell_Bacterial_spot', 'Pepper,_bell_healthy', 'Potato_Early_blight' , 'Potato_Late_blight', 'Potato_healthy', 'Raspberry_healthy', 'Soybean_healthy', 'Squash_Powdery_mildew', 'Strawberry_Leaf_scorch', 'Strawberry_healthy', 'Tomato_Bacterial_spot',  'Tomato_Early_blight', 'Tomato_Late_blight', 'Tomato_Leaf_Mold', 'Tomato_Septoria_leaf_spot', 'Tomato__Spider_mites Two-spotted_spider_mite','Tomato__Target_Spot', 'Tomato_Tomato_Yellow_Leaf_Curl_Virus', 'Tomato_Tomato_mosaic_virus', 'Tomato__healthy']
     MaxPosition=np.argmax(predi)  
+    global prediction_label
     prediction_label=prediction_label=classes[MaxPosition]
     print(prediction_label)
 
     context={'filePathName':filePathName,'predictedLabel':prediction_label}
-    return render(request,'index.html',context)
+    return (prediction_label)
+
+
+
+def display(request):
+
+    return response.JsonResponse(prediction_label,safe=False)
