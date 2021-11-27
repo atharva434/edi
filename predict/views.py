@@ -1,23 +1,16 @@
-from django.http import response
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
-import pickle
 import numpy as np
 from keras.models import load_model
-from tensorflow import Graph
+
 from keras.preprocessing import image
-from keras.applications.imagenet_utils import decode_predictions
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+
+
 # Create your views here.
-model_graph = Graph()
+
 
 model=load_model('models\plant_disease_detection_MobileNet.h5')
 
-# path='models/'
-# filename = 'densenet.pkl'
-# model = pickle.load(open(path+filename, 'rb'))
 
 def index(request):
     context={'a':1}
@@ -25,12 +18,10 @@ def index(request):
 
 img_height, img_width=224,224
 
-from django.views.decorators.csrf import csrf_exempt
-@csrf_exempt
 def predictImage(request):
     print (request)
     print (request.POST.dict())
-    fileObj=request.FILES['cover']
+    fileObj=request.FILES['filePath']
     fs=FileSystemStorage()
     filePathName=fs.save(fileObj.name,fileObj)
     filePathName=fs.url(filePathName)
@@ -54,10 +45,7 @@ def predictImage(request):
     print(prediction_label)
 
     context={'filePathName':filePathName,'predictedLabel':prediction_label}
-    return (prediction_label)
+    return render(request,'index.html',context) 
 
 
 
-def display(request):
-
-    return response.JsonResponse(prediction_label,safe=False)
