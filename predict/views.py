@@ -14,7 +14,7 @@ model=load_model('models\plant_disease_detection_MobileNet.h5')
 
 def index(request):
     context={'a':1}
-    return render(request,'index.html',context)
+    return render(request,'crop_index.html',context)
 
 img_height, img_width=224,224
 
@@ -45,7 +45,7 @@ def predictImage(request):
     print(prediction_label)
 
     context={'filePathName':filePathName,'predictedLabel':prediction_label}
-    return render(request,'index.html',context) 
+    return render(request,'crop_index.html',context) 
 
 
 

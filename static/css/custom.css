@@ -1,0 +1,35 @@
+body {
+	padding-top: 50px;
+	color: #959595;
+	}
+
+h1, h2, h3, h4, h5, h6 {
+	color: rgb(20, 20, 20);
+	}
+
+.feature {
+	background-color: rgb(33, 193, 92);
+	color: rgb(250, 253, 249);
+	opacity: 0.8;
+	background-image: url('crop_3.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;  
+	background-size: cover;
+	}
+.article-intro {
+    margin-bottom: 25px;
+}
+
+.footer-blurb {
+    padding: 30px 0;
+    background-color: goldenrod;
+    color: black;
+}
+    
+.footer-blurb-item {
+    padding: 30px;
+    }
+.small-print {
+	background-color: #fff;
+	padding: 30px 0;
+}
