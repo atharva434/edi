@@ -10,7 +10,7 @@
     <link href="{% static 'css/custom.css' %} " rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color: rgb(145, 141, 141);">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -22,9 +22,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
-                	<span class="glyphicon glyphicon-leaf"></span> 
-                </a>
+                
+                	<div class="logo">
+                        <img src="{% static 'img/logo.png' %}" alt="">
+                    </div>  
+                
             </div>
             <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="navbar">
@@ -35,9 +37,7 @@
                     <li>
                         <a href="#">About</a>
                     </li>
-                    <li>
-                        <a href="#">Products</a>
-                    </li>
+                    
                 </ul>
 
 				<!-- Search -->
@@ -62,7 +62,7 @@
 
     <!-- Content -->
 
-    <div class="container">
+    <div class="container_u">
         
         
         <!-- Heading -->
@@ -71,17 +71,52 @@
                 
                 <form method="post" enctype="multipart/form-data" action="predictImage">
                     {% csrf_token %}
-                <h2 class="page-header">Upload image for classification</h2>
-                <input name="filePath" type="file"><br>
-                <input type="submit" value="Submit" ></div>
+                <h1 class="page-header" style="text-align: center; color: white;"><b>Upload Image for Classification</b></h1>
+                
+                
+                    <input name="filePath" class="fas fa-upload" type="file" id="files" class="hidden"/>
+                    <label for="files" style="background-color: rgb(145, 255, 0);color: black;">Select file</label>
+                   <!--- <input name="filePath" class="fas fa-upload" type="file"  style="color: rgb(0, 0, 0);border: #306851;">
+                --><br>
+
+                <label for="file-input" style="background-color: white;">
+                    <i class="fas fa-upload"></i> &nbsp;
+                    <input type="submit" class="fas fa-upload" value="Submit" style="background-color: white; color: black;border: #21a16c; text-align: center;"></div>
+                </label>
+                
             </div>
         </div>
         <!-- /.row -->
 
     </div>
-    <h2>The classification of the image is {{predictedLabel}}</h2>
-    <img src={{filePathName}} alt='imagename'>
-    {{filePathName}}
+</div>
+<!--div class="container_u">
+    <h1>Upload file for chosen</h1>
+    <input type="file" id="file-input" accept="image/png, image/jpeg" onchange="preview()" multiple>
+    <label for="file-input">
+        <i class="fas fa-upload"></i> &nbsp; Upload
+    </label>
+    <p id="num-of-files">Upload the Pictures</p>
+    <div id="images"></div>
+</div>
+--->
+
+<div class="container_show" >
+<h2 style="color: rgb(223, 221, 217);">The classification of the image is {{predictedLabel}}</h2>
+<div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src={{filePathName}} alt='imagename' style="width:300px;height:300px;">
+        {{filePathName}}        
+      </div>
+      <div class="flip-card-back"></div>
+      <div class="flip-card-back">
+        <h1 style="color: rgb(223, 221, 217);">Disease detected</h1>
+        <p>{{predictedLabel}}</p>
+      </div>
+    </div>
+  </div>
+</div>
    
     <!-- /.footer 
 	<footer>
