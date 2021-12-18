@@ -1,1 +1,1 @@
-web: gunicorn plantdiseaserecoginition.wsgi --log-file -
+web: gunicorn plantdiseaserecognition.wsgi --log-file -
