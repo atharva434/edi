@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-wfs$psz73hoa!&2(wij4t0%ydi!dk_&t#eiuonsmnrg^0gphv)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['leafdetector.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition

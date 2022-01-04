@@ -9,14 +9,14 @@ from keras.preprocessing import image
 # Create your views here.
 
 
-model=load_model('models\plant_disease_detection_MobileNet.h5')
+model=load_model('models\Sugarcane.h5')
 
 
 def index(request):
     context={'a':1}
     return render(request,'crop_index.html',context)
 
-img_height, img_width=224,224
+img_height, img_width=30,30
 
 def predictImage(request):
     print (request)
@@ -38,7 +38,7 @@ def predictImage(request):
     classes_x=np.argmax(predi)
     
     print(classes_x)
-    classes=['Apple__Apple_scab', 'Apple_Black_rot', 'Apple_Cedar_apple_rust', 'Apple_healthy',  'Blueberry_healthy', 'Cherry(including_sour)___Powdery_mildew','Cherry_(including_sour)__healthy','Corn(maize)__Cercospora_leaf_spot Gray_leaf_spot', 'Corn(maize)__Common_rust', 'Corn_(maize)___Northern_Leaf_Blight','Corn_(maize)__healthy',  'Grape_Black_rot', 'Grape_Esca(Black_Measles)', 'Grape__Leaf_blight(Isariopsis_Leaf_Spot)', 'Grape__healthy', 'Orange_Haunglongbing(Citrus_greening)',  'Peach__Bacterial_spot', 'Peach_healthy', 'Pepper,_bell_Bacterial_spot', 'Pepper,_bell_healthy', 'Potato_Early_blight' , 'Potato_Late_blight', 'Potato_healthy', 'Raspberry_healthy', 'Soybean_healthy', 'Squash_Powdery_mildew', 'Strawberry_Leaf_scorch', 'Strawberry_healthy', 'Tomato_Bacterial_spot',  'Tomato_Early_blight', 'Tomato_Late_blight', 'Tomato_Leaf_Mold', 'Tomato_Septoria_leaf_spot', 'Tomato__Spider_mites Two-spotted_spider_mite','Tomato__Target_Spot', 'Tomato_Tomato_Yellow_Leaf_Curl_Virus', 'Tomato_Tomato_mosaic_virus', 'Tomato__healthy']
+    classes=["RedRot", "RedRust","Healthy"]    
     MaxPosition=np.argmax(predi)  
     global prediction_label
     prediction_label=prediction_label=classes[MaxPosition]
