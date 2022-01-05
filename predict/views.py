@@ -16,7 +16,7 @@ def index(request):
     context={'a':1}
     return render(request,'crop_index.html',context)
 
-img_height, img_width=30,30
+img_height, img_width=32,32
 
 def predictImage(request):
     print (request)
