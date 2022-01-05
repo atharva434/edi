@@ -9,7 +9,7 @@ from keras.preprocessing import image
 # Create your views here.
 
 
-model=load_model('models\Sugarcane.h5')
+model=load_model('models/Sugarcane.h5')
 
 
 def index(request):
