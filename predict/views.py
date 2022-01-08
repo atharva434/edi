@@ -9,14 +9,14 @@ from keras.preprocessing import image
 # Create your views here.
 
 
-model=load_model('models/MobileNetV2_Model.h5')
+model=load_model('models/densenet.h5')
 
 
 def index(request):
     context={'a':1}
     return render(request,'crop_index.html',context)
 
-img_height, img_width=224,224
+img_height, img_width=32,32
 
 def predictImage(request):
     print (request)
@@ -38,7 +38,7 @@ def predictImage(request):
     classes_x=np.argmax(predi)
     
     print(classes_x)
-    classes=["Healthy","Red Rot", "Red Rust"]    
+    classes=["RedRot","RedRust","Healthy"]    
     MaxPosition=np.argmax(predi)  
     global prediction_label
     prediction_label=prediction_label=classes[MaxPosition]
